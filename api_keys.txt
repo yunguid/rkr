@@ -1,1 +1,3 @@
 AlphaVantage: JXRNYVYBVD826WVE
+
+polygon.io: JEXTjx_z3ADb4bnBnoFZoKO50gp2Z5vi
