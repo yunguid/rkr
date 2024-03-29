@@ -1,8 +1,9 @@
 use reqwest::Client;
 use serde::Serialize;
+use std::env;   
 
 const CLAUDE_API_URL: &str = "https://api.anthropic.com/v1/complete";
-const CLAUDE_API_KEY: &str = "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";
+
 
 #[derive(Serialize)]
 struct ClaudeRequest {
@@ -13,6 +14,7 @@ struct ClaudeRequest {
 
 pub async fn generate_summary(portfolio_data: &str) -> Result<String, reqwest::Error> {
     let client = Client::new();
+    let api_key = env::var("CLAUDE_API_KEY").expect("CLAUDE_API_KEY not set in environment");
     let request_body = ClaudeRequest {
         prompt: format!("
 Human:
@@ -42,7 +44,6 @@ Include the following sections in your summary:
 Please format the summary in a clear and readable manner, using appropriate headings, bullet points, and paragraphs.
 
 Assistant:
-
 ", portfolio_data),
         model: "claude-v1".to_string(),
         max_tokens_to_sample: 500,
@@ -51,7 +52,7 @@ Assistant:
     let response = client
         .post(CLAUDE_API_URL)
         .header("Content-Type", "application/json")
-        .header("x-api-key", CLAUDE_API_KEY)
+        .header("x-api-key", api_key)
         .header("anthropic-version", "2023-06-01")
         .json(&request_body)
         .send()
