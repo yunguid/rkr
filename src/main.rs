@@ -8,9 +8,14 @@ use log::{info, error};
 use env_logger;
 use chrono::Utc;
 use crate::data_ingestion::data_provider::AggregateResponse;
+use crate::report_generation::latex_generator;
+
 
 mod data_ingestion;
 mod claude_api;
+mod report_generation {
+    pub mod latex_generator;
+}
 
 const PORTFOLIO_FILE: &str = "portfolios.txt";
 
@@ -149,11 +154,24 @@ async fn generate_summary_report(symbols: &[String], start_date: &str, end_date:
             // Generate the summary using the Claude API
             match claude_api::generate_summary(&symbol_summary).await {
                 Ok(summary) => {
-                    let report_path = format!("reports/{}/{}_summary.txt", current_date, symbol);
-                    let mut file = fs::File::create(&report_path).expect("Failed to create summary report file");
-                    writeln!(file, "Summary Report for {}\n", symbol).expect("Failed to write to summary report file");
-                    writeln!(file, "{}", summary).expect("Failed to write to summary report file");
-                    info!("Generated summary report for {}: {}", symbol, report_path);
+                    // Use the latex_generator module to convert summary into LaTeX format
+                    let latex_content = report_generation::latex_generator::create_latex_document(&summary);
+                    let latex_file_path = format!("reports/{}/{}_summary.tex", current_date, symbol);
+                    let pdf_file_path = format!("reports/{}/{}_summary.pdf", current_date, symbol);
+                    
+                    // Generate LaTeX file
+                    if let Err(e) = report_generation::latex_generator::generate_latex_file(&latex_content, &latex_file_path) {
+                        error!("Failed to generate LaTeX file for {}: {}", symbol, e);
+                        continue;
+                    }
+                    
+                    // Compile LaTeX file to PDF
+                    if let Err(e) = report_generation::latex_generator::compile_latex_to_pdf(&latex_file_path) {
+                        error!("Failed to compile LaTeX file to PDF for {}: {}", symbol, e);
+                        continue;
+                    }
+                    
+                    info!("Generated LaTeX PDF report for {}: {}", symbol, pdf_file_path);
                 }
                 Err(e) => {
                     error!("Failed to generate summary report for {}: {}", symbol, e);
