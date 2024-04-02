@@ -24,7 +24,7 @@ pub fn create_latex_document(summary: &str, symbol: &str) -> String {
 \usepackage{{hyperref}}
 \begin{{document}}
 
-\title{{Summary Report for }}
+\title{{Summary Report for {}}}
 \date{{\today}}
 \maketitle
 

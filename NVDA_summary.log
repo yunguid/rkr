@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.2)  2 APR 2024 14:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.2)  2 APR 2024 17:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -208,7 +208,7 @@ LaTeX Warning: No \author given.
 <inserted text> 
                 $
 l.9 {"type":"completion","id":"compl_
-                                     01CU8h6iVjgrVMvRoCNYHpmf","completion":...
+                                     01J4jwQUkX5AKLbowDb9n5qX","completion":...
 
 ? 
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -216,18 +216,18 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 9.
 ! Undefined control sequence.
-l.9 ...for NVDA from October 2023 to April 2024:\n
-                                                  \nOverview: \nNVDA's stock...
+l.9 ...etween October 5, 2023 and April 2, 2024:\n
+                                                  \nOverview\nThe stock pric...
 
 ? 
 ! Undefined control sequence.
-l.9 ...rom October 2023 to April 2024:\n\nOverview
-                                                  : \nNVDA's stock price inc...
+l.9 ...ober 5, 2023 and April 2, 2024:\n\nOverview
+                                                  \nThe stock price of NVDA ...
 
 ? 
 ! Undefined control sequence.
-l.9 ...ber 2023 to April 2024:\n\nOverview: \nNVDA
-                                                  's stock price increased s...
+l.9 ...5, 2023 and April 2, 2024:\n\nOverview\nThe
+                                                   stock price of NVDA incre...
 
 ? 
 ! Missing $ inserted.
@@ -237,25 +237,25 @@ l.10
      
 ? 
 
-Overfull \hbox (46.08315pt too wide) in paragraph at lines 9--10
-[]\OT1/cmr/m/n/10 "type":"completion","id":"compl$[]1\OML/cmm/m/it/10 CU\OT1/cm
-r/m/n/10 8\OML/cmm/m/it/10 h\OT1/cmr/m/n/10 6\OML/cmm/m/it/10 iVjgrVMvRoCNYHpmf
-\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 "\OML/cmm/m/it/10 completio
-n\OT1/cmr/m/n/10 " :
+Overfull \hbox (39.80148pt too wide) in paragraph at lines 9--10
+[]\OT1/cmr/m/n/10 "type":"completion","id":"compl$[]1\OML/cmm/m/it/10 J\OT1/cmr
+/m/n/10 4\OML/cmm/m/it/10 jwQUkX\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 AKLbowDb\OT1/
+cmr/m/n/10 9\OML/cmm/m/it/10 n\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 qX\OT1/cmr/m/n/
+10 "\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 "\OML/cmm/m/it/10 completion\OT1/cmr/m/n
+/10 " :
  []
 
 
-Overfull \hbox (15.96991pt too wide) in paragraph at lines 9--10
-\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 HereisasummaryoftheportfoliodataforNVDAfromOc
-tober\OT1/cmr/m/n/10 2023\OML/cmm/m/it/10 toApril\OT1/cmr/m/n/10 2024 ::[]
+Overfull \hbox (48.22336pt too wide) in paragraph at lines 9--10
+\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 HereisasummaryoftheportfoliodataforNVDAbetwee
+nOctober\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2023\OML/cmm/m/it/1
+0 andApril\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2024 :
  []
 
 
-Overfull \hbox (151.25699pt too wide) in paragraph at lines 9--10
-\OML/cmm/m/it/10 sstockpriceincreasedsignificantlyduringthisperiod; risingfrom$
-\OT1/cmr/m/n/10 440.50 to $903\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 63\OML/cmm/m/it
-/10 ; whichrepresentsagainof\OT1/cmr/m/n/10 105\OML/cmm/m/it/10 :\OT1/cmr/m/n/1
-0 14$ 
+Overfull \hbox (31.26404pt too wide) in paragraph at lines 9--10
+\OML/cmm/m/it/10 stockpriceofNVDAincreasedsignificantlyoverthegiventimeperiod; 
+startingat$\OT1/cmr/m/n/10 440.50
  []
 
 [1
@@ -287,18 +287,17 @@ Here is how much of TeX's memory you used:
  29812 multiletter control sequences out of 15000+600000
  561104 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,2524b,444s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,79p,2192b,444s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb>
-Output written on NVDA_summary.pdf (1 page, 68365 bytes).
+7.pfb>
+Output written on NVDA_summary.pdf (1 page, 61508 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 38 PDF objects out of 1000 (max. 8388607)
+ 24 compressed objects within 1 object stream
  2 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
