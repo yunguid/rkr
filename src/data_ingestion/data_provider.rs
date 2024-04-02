@@ -1,10 +1,11 @@
 use reqwest::Client;
 use serde::Deserialize;
-
+use anyhow::anyhow;
+use anyhow::{Result, Error};
+use reqwest::Error as ReqwestError;
+use std::env;
 
 const POLYGON_API_URL: &str = "https://api.polygon.io/v2/aggs/ticker";
-const API_KEY: &str = "JEXTjx_z3ADb4bnBnoFZoKO50gp2Z5vi";
-
 
 #[derive(Deserialize, Debug)]
 pub struct AggregateResponse {
@@ -34,13 +35,22 @@ impl DataProvider {
         }
     }
 
-    pub async fn fetch_data(&self, symbol: &str, from: &str, to: &str) -> Result<AggregateResponse, reqwest::Error> {
-        let url = format!("{}/{}/range/1/day/{}/{}?adjusted=true&apiKey={}", POLYGON_API_URL, symbol, from, to, API_KEY);
-        //println!("Fetching data from {} to {}", from, to);
+    pub async fn fetch_data(&self, symbol: &str, from: &str, to: &str) -> Result<AggregateResponse, Error> {
+        let api_key = env::var("POLYGON_API_KEY").expect("POLYGON_API_KEY must be set");
+        let url = format!("{}/{}/range/1/day/{}/{}?adjusted=true&apiKey={}", POLYGON_API_URL, symbol, from, to, api_key);
+        println!("Fetching data for {} from {} to {}", symbol, from, to);
         let response = self.client.get(&url).send().await?;
-        //println!("Response: {:?}", response);
-        let data: AggregateResponse = response.json().await?;
-        //println!("Data: {:?}", data);
-        Ok(data)
+    
+        println!("Response: {:?}", response);
+        if response.status().is_success() {
+            let data: AggregateResponse = response.json().await?;
+            println!("Data: {:?}", data);
+            Ok(data)
+        } else {
+            let status = response.status();
+            let error_message = response.text().await?;
+            println!("Error fetching data for {}: {}", symbol, error_message);
+            Err(anyhow!("Error fetching data for {}: {}", symbol, error_message))
+        }
     }
 }

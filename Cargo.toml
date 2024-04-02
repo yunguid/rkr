@@ -14,5 +14,5 @@ alpha_vantage = "0.2.0"
 log = "0.4.14"
 env_logger = "0.9.0"
 chrono = "0.4.19"
-
+anyhow = "1.0.60"
 

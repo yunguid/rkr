@@ -1,5 +1,5 @@
 use std::io::{self, Write};
-use std::fs::{File, OpenOptions};
+use std::fs::{OpenOptions};
 use std::path::Path;
 use std::fs;
 use std::sync::Arc;
@@ -86,12 +86,15 @@ async fn main() {
 
 fn load_portfolios() -> Vec<Vec<String>> {
     if Path::new(PORTFOLIO_FILE).exists() {
-        let contents = std::fs::read_to_string(PORTFOLIO_FILE).expect("Failed to read portfolio file");
-        contents.lines().map(|line| line.split(',').map(|s| s.trim().to_string()).collect()).collect()
+        let contents = fs::read_to_string(PORTFOLIO_FILE).expect("Failed to read portfolio file");
+        contents.lines()
+            .map(|line| line.split_whitespace().map(|s| s.trim().to_string()).collect())
+            .collect()
     } else {
         Vec::new()
     }
 }
+
 
 fn save_portfolio(symbols: &[String]) {
     let mut file = OpenOptions::new()

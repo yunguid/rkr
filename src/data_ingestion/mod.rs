@@ -1,8 +1,5 @@
 use crate::data_ingestion::data_provider::AggregateResponse;
-
 pub mod data_provider;
-
-
 use data_provider::DataProvider;
 use log::{info, error};
 
@@ -11,6 +8,7 @@ pub async fn fetch_market_data(symbols: &[String], start_date: &str, end_date: &
     let mut market_data = Vec::new();
 
     for symbol in symbols {
+        println!("Fetching data for {}", symbol);
         match provider.fetch_data(symbol, start_date, end_date).await {
             Ok(data) => {
                 info!("Fetched market data for {}", symbol);
@@ -21,6 +19,6 @@ pub async fn fetch_market_data(symbols: &[String], start_date: &str, end_date: &
             }
         }
     }
-    Ok::<Vec<AggregateResponse>, reqwest::Error>(market_data)
-}
 
+    Ok(market_data)
+}
