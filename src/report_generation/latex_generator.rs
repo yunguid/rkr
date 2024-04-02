@@ -2,19 +2,13 @@ use serde_json::Value;
 use std::fs::File;
 use std::io::{Write, Error};
 use std::process::Command;
-extern crate serde_json;
-extern crate serde;
-
-
-pub fn extract_completion_from_json(json_data: &str) -> Result<String, serde_json::Error> {
-    let parsed: Value = serde_json::from_str(json_data)?;
-    Ok(parsed["completion"].as_str().unwrap().to_string())
-}
+use std::path::Path;
 
 /// Parses the JSON string to extract the summary data.
 pub fn parse_summary_data(json_data: &str) -> Result<Value, serde_json::Error> {
     let parsed: Value = serde_json::from_str(json_data)?;
-    Ok(parsed["completion"].clone())
+    let completion = parsed["completion"].as_str().ok_or_else(|| serde_json::Error::custom("Key 'completion' not found"))?;
+    Ok(completion.to_string())
 }
 
 /// Creates a LaTeX document string from the summary data.
@@ -49,6 +43,14 @@ pub fn compile_latex_to_pdf(file_path: &str) -> Result<(), Error> {
         .arg(file_path)
         .spawn()?
         .wait_with_output()?;
+    if !output.status.success() {
+        return Err(Error::new(ErrorKind::Other, "Failed to compile LaTeX to PDF"));
+    }
+    // clean up extra files
+    let base_path = Path::new(file_path).with_extension("");
+    for extension in &["aux", "log", "out"] {
+        let _ = std::fs::remove_file(base_path.with_extension(extension));
+    }
     Ok(())
 }
 
