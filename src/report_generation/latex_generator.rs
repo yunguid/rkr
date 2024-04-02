@@ -2,6 +2,14 @@ use serde_json::Value;
 use std::fs::File;
 use std::io::{Write, Error};
 use std::process::Command;
+extern crate serde_json;
+extern crate serde;
+
+
+pub fn extract_completion_from_json(json_data: &str) -> Result<String, serde_json::Error> {
+    let parsed: Value = serde_json::from_str(json_data)?;
+    Ok(parsed["completion"].as_str().unwrap().to_string())
+}
 
 /// Parses the JSON string to extract the summary data.
 pub fn parse_summary_data(json_data: &str) -> Result<Value, serde_json::Error> {
@@ -10,13 +18,13 @@ pub fn parse_summary_data(json_data: &str) -> Result<Value, serde_json::Error> {
 }
 
 /// Creates a LaTeX document string from the summary data.
-pub fn create_latex_document(summary: &str) -> String {
+pub fn create_latex_document(summary: &str, symbol: &str) -> String {
     format!(
         r#"\documentclass{{article}}
 \usepackage{{hyperref}}
 \begin{{document}}
 
-\title{{Summary Report for NVDA}}
+\title{{Summary Report for }}
 \date{{\today}}
 \maketitle
 
@@ -24,7 +32,7 @@ pub fn create_latex_document(summary: &str) -> String {
 
 \end{{document}}
 "#,
-        summary.replace("•", "\\item ")
+        symbol, summary.replace("•", "\\item ")
     )
 }
 
@@ -59,7 +67,8 @@ mod tests {
     #[test]
     fn test_latex_document_creation() {
         let summary = "Here is the summary...";
-        let latex_doc = create_latex_document(summary);
+        let symbol = "NVDA";
+        let latex_doc = create_latex_document(summary, symbol);
         assert!(latex_doc.contains("\\title{Summary Report for NVDA}"));
         assert!(latex_doc.contains(summary));
     }

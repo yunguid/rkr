@@ -155,7 +155,8 @@ async fn generate_summary_report(symbols: &[String], start_date: &str, end_date:
             match claude_api::generate_summary(&symbol_summary).await {
                 Ok(summary) => {
                     // Use the latex_generator module to convert summary into LaTeX format
-                    let latex_content = report_generation::latex_generator::create_latex_document(&summary);
+
+                    let latex_content = report_generation::latex_generator::create_latex_document(&summary, &symbol);
                     let latex_file_path = format!("reports/{}/{}_summary.tex", current_date, symbol);
                     let pdf_file_path = format!("reports/{}/{}_summary.pdf", current_date, symbol);
                     
